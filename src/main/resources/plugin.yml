@@ -2,3 +2,14 @@ name: ${name}
 version: ${version}
 main: ${groupId}.${name}
 author: Soer
+softdepend: [CombatTagPlus]
+
+permissions:
+  bumhug.*:
+    description: Gives all Bumhug permissions
+    default: op
+    children:
+      bumhug.broadcastCombat: true
+  bumhug.broadcastCombat:
+    description: Receive broadcasts when a player is combat-tagged
+    default: op

@@ -2,6 +2,10 @@ package dev.civmc.bumhug
 
 import org.bukkit.configuration.ConfigurationSection
 
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Depend(vararg val dependencies: String)
+
 abstract class Hack {
 	
 	abstract val configName: String
