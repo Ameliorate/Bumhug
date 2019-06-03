@@ -1,0 +1,4 @@
+gameFeatures:
+  enabled: true
+  pistons: false
+  hoppers: false
