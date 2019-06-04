@@ -121,4 +121,18 @@
 		</resource>
 	</resources>
   </build>
+  <distributionManagement>
+  <repository>
+    <id>packagecloud-travis</id>
+    <url>
+      packagecloud+https://packagecloud.io/Soer/civ
+    </url>
+  </repository>
+  <snapshotRepository>
+    <id>packagecloud-travis</id>
+    <url>
+      packagecloud+https://packagecloud.io/Soer/civ
+    </url>
+  </snapshotRepository>
+</distributionManagement>
 </project>
