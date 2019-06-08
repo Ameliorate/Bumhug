@@ -18,6 +18,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.meta.FireworkMeta
 
 class GameFeatures: Hack(), Listener {
 	override val configName = "gameFeatures"
@@ -31,6 +32,7 @@ class GameFeatures: Hack(), Listener {
 	private val shulkerBoxUse = config.getBoolean("shulkerBoxUse")
 	private val enderChestUse = config.getBoolean("enderChestUse")
 	private val enderChestPlacement = config.getBoolean("enderChestPlacement")
+	private val disableElytraFirework = config.getBoolean("disableElytraFirework")
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	fun onPistonActivate(event: BlockPistonExtendEvent) {
@@ -109,6 +111,21 @@ class GameFeatures: Hack(), Listener {
 			if (event.destination.type == InventoryType.SHULKER_BOX || event.source.type == InventoryType.SHULKER_BOX) {
 				event.setCancelled(true);
 			}
+		}
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL)
+	fun onPlayerFirework(event: PlayerInteractEvent) {
+		if (disableElytraFirework && event.item.itemMeta is FireworkMeta) {
+			val meta: FireworkMeta = event.item.itemMeta as FireworkMeta
+
+			if (event.player.isFlying)
+				event.isCancelled = true
+
+			if (!meta.hasEffects())
+				event.isCancelled = true
+
+			// double ended test: try to disable all fireworks if flying, but also disable all empty fireworks.
 		}
 	}
 }
