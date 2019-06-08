@@ -23,7 +23,7 @@ class Bumhug: JavaPlugin() {
 	
 	private fun loadHacks() {
 		val samplersPath = ClassPath.from(this.getClassLoader());
-		for (clsInfo in samplersPath.getTopLevelClasses("dev.civmc.bumhug.hacks")) {
+		hacks@ for (clsInfo in samplersPath.getTopLevelClasses("dev.civmc.bumhug.hacks")) {
 			val clazz = clsInfo.load()
 			if (clazz != null && Hack::class.java.isAssignableFrom(clazz)) {
 				logger.log(Level.INFO, "Found hack " + clazz.typeName)
@@ -38,6 +38,7 @@ class Bumhug: JavaPlugin() {
 							for (dependency in depends.dependencies) {
 								if (this.server.pluginManager.getPlugin(dependency) == null) {
 									logger.log(Level.WARNING, "Couldn't load hack " + clazz.typeName + ". Missing dependency " + dependency)
+									continue@hacks
 								}
 							}
 						}
