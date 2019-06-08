@@ -13,3 +13,12 @@ permissions:
   bumhug.broadcastCombat:
     description: Receive broadcasts when a player is combat-tagged
     default: op
+  bumhug.reloadInventory:
+    description: Reload a player's inventoy from before the last time they died
+    default: op
+
+commands:
+  reloadinventoy:
+    description: Reload a player's inventoy from before the last time they died
+    permission: bumhug.reloadInventory
+    usage: /reloadinventory [playername:UUID]
