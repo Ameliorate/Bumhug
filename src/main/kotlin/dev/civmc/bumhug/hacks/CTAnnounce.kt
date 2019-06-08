@@ -33,8 +33,9 @@ class CTAnnounce: Hack(), Listener {
 
 		val cleanMessage = ChatColor.translateAlternateColorCodes('&',
 			message
-			.replace("%Victim%", event.victim.getDisplayName())
-			.replace("%Attacker%", event.attacker.getDisplayName()))
+			.replace("%Victim%", event.victim.displayName)
+			.replace("%Attacker%", event.attacker.displayName)
+		)
 		Bumhug.instance!!.logger.log(Level.INFO, cleanMessage)
 		Bumhug.instance!!.broadcastToPerm("broadcastCombat", cleanMessage)
 	}

@@ -2,7 +2,7 @@ name: ${name}
 version: ${version}
 main: ${groupId}.${name}
 author: Soer
-softdepend: [CombatTagPlus]
+softdepend: [CombatTagPlus, Citadel]
 
 permissions:
   bumhug.*:
@@ -12,4 +12,10 @@ permissions:
       bumhug.broadcastCombat: true
   bumhug.broadcastCombat:
     description: Receive broadcasts when a player is combat-tagged
+    default: op
+  bumhug.bypassChunkLimits:
+    description: Place blocks in chunks that have exceeded the chunk limit for that type of block
+    default: op
+  bumhug.broadcastRaiding:
+    description: Receive broadcasts when a player is breaking a reinforced chest
     default: op
