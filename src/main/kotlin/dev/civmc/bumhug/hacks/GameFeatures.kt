@@ -1,10 +1,14 @@
 package dev.civmc.bumhug.hacks
 
+import dev.civmc.bumhug.Bumhug
 import dev.civmc.bumhug.Hack
+import dev.civmc.bumhug.util.tryToTeleportVertically
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.block.Biome
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -18,7 +22,11 @@ import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.vehicle.VehicleDestroyEvent
+import org.bukkit.event.vehicle.VehicleExitEvent
 import org.bukkit.inventory.meta.FireworkMeta
+import java.util.logging.Level
 
 class GameFeatures: Hack(), Listener {
 	override val configName = "gameFeatures"
@@ -33,6 +41,7 @@ class GameFeatures: Hack(), Listener {
 	private val enderChestUse = config.getBoolean("enderChestUse")
 	private val enderChestPlacement = config.getBoolean("enderChestPlacement")
 	private val disableElytraFirework = config.getBoolean("disableElytraFirework")
+	private val enableMinecartTeleporter = config.getBoolean("minecartTeleporter")
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	fun onPistonActivate(event: BlockPistonExtendEvent) {
@@ -126,6 +135,66 @@ class GameFeatures: Hack(), Listener {
 				event.isCancelled = true
 
 			// double ended test: try to disable all fireworks if flying, but also disable all empty fireworks.
+		}
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    fun onPlayerQuitInMinecart(event: PlayerQuitEvent) {
+		if (enableMinecartTeleporter) {
+			if (event.player.vehicle == null)
+				return
+
+			val vehicleLocatoin = event.player.vehicle.location
+			event.player.leaveVehicle()
+
+			if (!tryToTeleportVertically(event.player, vehicleLocatoin, "logged out")) {
+				event.player.setHealth(0.000000)
+				Bumhug.instance!!.logger.log(Level.INFO, "Player '${event.player.name}' logged out in vehicle: killed")
+			}
+		}
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	fun onVehicleExitTeleport(event: VehicleExitEvent) {
+		if (enableMinecartTeleporter) {
+			if (event.vehicle == null)
+				return
+
+			val player: Player
+			val passanger = event.exited;
+			if (passanger is Player) player = passanger else return
+
+			Bukkit.getScheduler().runTaskLater(Bumhug.instance, {
+				if (!tryToTeleportVertically(player, event.vehicle.location, "exiting vehicle")) {
+					player.health = 0.000000
+					Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
+				}
+			}, 2)
+		}
+	}
+
+	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+	fun onVehicleDestoryTeleport(event: VehicleDestroyEvent) {
+		if (enableMinecartTeleporter) {
+			if (event.vehicle == null)
+				return
+
+			var passangers = event.vehicle.passengers;
+			if (passangers == null || passangers.isEmpty())
+				return
+
+			passangers.removeIf { !(it is Player) }
+			passangers.forEach {
+				run {
+					var player = it as Player
+					Bukkit.getScheduler().runTaskLater(Bumhug.instance, {
+						if (!tryToTeleportVertically(player, event.vehicle.location, "in destroyed vehicle")) {
+							it.health = 0.000000
+							Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
+						}
+					}, 2)
+				}
+			}
 		}
 	}
 }
