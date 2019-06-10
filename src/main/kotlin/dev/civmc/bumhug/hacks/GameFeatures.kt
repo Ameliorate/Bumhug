@@ -42,7 +42,7 @@ class GameFeatures: Hack(), Listener {
 	private val enderChestPlacement = config.getBoolean("enderChestPlacement")
 	private val disableElytraFirework = config.getBoolean("disableElytraFirework")
 	private val enableMinecartTeleporter = config.getBoolean("minecartTeleporter")
-	
+
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	fun onPistonActivate(event: BlockPistonExtendEvent) {
 		if (!pistons) {
