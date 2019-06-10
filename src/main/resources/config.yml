@@ -8,6 +8,7 @@ gameFeatures:
   enderChestUse: false
   enderChestPlacement: true
   disableElytraFirework: true
+  preventFallingThroughBedrock: true
 ctAnnounce:
   enabled: true
   delay: 10000
