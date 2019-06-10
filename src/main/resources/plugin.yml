@@ -22,8 +22,18 @@ permissions:
   bumhug.reloadInventory:
     description: Reload a player's inventoy from before the last time they died
     default: op
+  bumhug.ping:
+    description: Get your own ping with a command
+    default: true
+  bumhug.ping.other:
+    description: Get another player's ping
+    default: op
 commands:
   reloadinventoy:
     description: Reload a player's inventoy from before the last time they died
     permission: bumhug.reloadInventory
     usage: /reloadinventory [playername:UUID]
+  ping:
+    description: Get the ping of yourself or another player
+    permission: bumhug.ping
+    usage: /ping [playername:UUID]

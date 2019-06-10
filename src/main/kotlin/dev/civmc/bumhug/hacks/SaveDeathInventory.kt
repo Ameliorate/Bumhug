@@ -1,7 +1,7 @@
 package dev.civmc.bumhug.hacks
 
 import dev.civmc.bumhug.Hack
-import org.bukkit.Bukkit
+import dev.civmc.bumhug.util.getPlayerByString
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -35,13 +35,7 @@ class SaveDeathInventory: Hack(), Listener, CommandExecutor {
         if (args.size != 1)
             return false
 
-        var player: Player?
-        try {
-            player = Bukkit.getPlayer(UUID.fromString(args[0]))
-        } catch (e: IllegalArgumentException) {
-            player = Bukkit.getPlayer(args[0]);
-        }
-
+        val player: Player? = getPlayerByString(args[0])
         if (player == null) {
             sender.sendMessage("${ChatColor.RED}${args[0]} is not valid or is not online")
             return true;
