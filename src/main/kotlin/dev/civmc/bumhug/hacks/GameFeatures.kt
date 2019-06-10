@@ -5,7 +5,6 @@ import dev.civmc.bumhug.Hack
 import dev.civmc.bumhug.util.tryToTeleportVertically
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.block.Biome
 import org.bukkit.entity.EntityType
@@ -23,7 +22,6 @@ import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.vehicle.VehicleDestroyEvent
 import org.bukkit.event.vehicle.VehicleExitEvent
@@ -44,8 +42,7 @@ class GameFeatures: Hack(), Listener {
 	private val enderChestPlacement = config.getBoolean("enderChestPlacement")
 	private val disableElytraFirework = config.getBoolean("disableElytraFirework")
 	private val enableMinecartTeleporter = config.getBoolean("minecartTeleporter")
-	private val preventFallingThroughBedrock = config.getBoolean("preventFallingThroughBedrock")
-	
+
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	fun onPistonActivate(event: BlockPistonExtendEvent) {
 		if (!pistons) {
@@ -198,26 +195,6 @@ class GameFeatures: Hack(), Listener {
 					}, 2)
 				}
 			}
-		}
-	}
-
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	fun onPlayerFallThroughBedrock(event: PlayerMoveEvent) {
-		if (preventFallingThroughBedrock) {
-			if (event.to.y >= 0)
-				return
-
-			if (event.from.y <= -3) {
-				// prevent excessive calls to tryToTeleportVertically
-				// this uses from rather than to because in lag to may jump from greater than 0 to less than negative 3,
-				// while from will never jump like that
-                return
-			}
-
-			if (event.player.gameMode != GameMode.SURVIVAL)
-				return
-
-			tryToTeleportVertically(event.player, event.to, "falling into the void")
 		}
 	}
 }
