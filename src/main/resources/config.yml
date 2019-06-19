@@ -52,3 +52,5 @@ deathMessages:
   sendPlayerCoordsOnDeath: true
   announceDeaths: true
   redDeathMessages: true
+obsidianGenerators:
+  enabled: true
