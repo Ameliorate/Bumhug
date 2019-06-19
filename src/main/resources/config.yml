@@ -47,4 +47,8 @@ newfriendAssist:
     bed:
       material: BED
       amount: 1
-    
+deathMessages:
+  enabled: true
+  sendPlayerCoordsOnDeath: true
+  announceDeaths: true
+  redDeathMessages: true
