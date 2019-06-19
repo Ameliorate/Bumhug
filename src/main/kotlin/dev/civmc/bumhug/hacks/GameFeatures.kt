@@ -7,6 +7,7 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.block.Biome
+import org.bukkit.entity.Enderman
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -17,6 +18,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason
+import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.inventory.InventoryType
@@ -42,6 +44,7 @@ class GameFeatures: Hack(), Listener {
 	private val enderChestPlacement = config.getBoolean("enderChestPlacement")
 	private val disableElytraFirework = config.getBoolean("disableElytraFirework")
 	private val enableMinecartTeleporter = config.getBoolean("minecartTeleporter")
+	private val endermanGrief = config.getBoolean("endermanGrief")
 
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	fun onPistonActivate(event: BlockPistonExtendEvent) {
@@ -196,5 +199,14 @@ class GameFeatures: Hack(), Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	fun onEndermanGrief(event: EntityChangeBlockEvent) {
+		if (endermanGrief) {
+			return
+		}
+		if (event.entity is Enderman)
+			event.setCancelled(true)
 	}
 }

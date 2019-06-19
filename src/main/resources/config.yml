@@ -9,6 +9,7 @@ gameFeatures:
   enderChestPlacement: true
   disableElytraFirework: true
   minecartTeleporter: true
+  endermanGrief: false
 gameFixes:
   preventFallingThroughBedrock: true
   preventBedBombing: true
