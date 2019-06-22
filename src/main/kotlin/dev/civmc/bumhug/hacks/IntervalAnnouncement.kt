@@ -18,7 +18,7 @@ class IntervalAnnouncement: Hack() {
 
     var announcements = HashSet<Announcement>()
 
-    class Announcement(
+    data class Announcement(
             /**
              * The key of the announcement in the config
              */
