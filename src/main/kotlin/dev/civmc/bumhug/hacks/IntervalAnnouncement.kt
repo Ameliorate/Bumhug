@@ -97,6 +97,9 @@ class IntervalAnnouncement: Hack() {
                             .isBefore(LocalDateTime.now())) {
                 // make the announcement
                 Bukkit.broadcast(announcement.message, announcement.permission)
+
+                // update time
+                announcement.lastAnnouncementTime = LocalDateTime.now()
             }
         }
     }
