@@ -52,12 +52,18 @@
         </exclusion>
       </exclusions>
     </dependency>
-      <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-reflect</artifactId>
-          <version>RELEASE</version>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-reflect</artifactId>
+        <version>RELEASE</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>vg.civcraft.mc.civmodcore</groupId>
+        <artifactId>CivModCore</artifactId>
+        <version>1.6.0</version>
+        <scope>provided</scope>
+    </dependency>
   </dependencies>
   <repositories>
       <repository>

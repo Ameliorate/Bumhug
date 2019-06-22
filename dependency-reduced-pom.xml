@@ -140,9 +140,13 @@
     <dependency>
       <groupId>vg.civcraft.mc.civmodcore</groupId>
       <artifactId>CivModCore</artifactId>
-      <version>1.6.1</version>
+      <version>1.6.0</version>
       <scope>provided</scope>
       <exclusions>
+        <exclusion>
+          <artifactId>metrics</artifactId>
+          <groupId>org.mcstats.bukkit</groupId>
+        </exclusion>
         <exclusion>
           <artifactId>HikariCP</artifactId>
           <groupId>com.zaxxer</groupId>
