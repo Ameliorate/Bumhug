@@ -13,12 +13,16 @@ import kotlin.reflect.KAnnotatedElement
  */
 class Bumhug: JavaPlugin() {
 	companion object {
-		var instance: Bumhug? = null
+		private var instanceStorage: Bumhug? = null
+
+		internal val instance: Bumhug
+			get() = instanceStorage!!
+
 		var hacks = HashMap<String, Hack>()
 	}
 	
 	override fun onEnable() {
-		instance = this
+		instanceStorage = this
 		loadHacks()
 	}
 	
