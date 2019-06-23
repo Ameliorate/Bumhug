@@ -28,6 +28,9 @@ permissions:
   bumhug.ping.other:
     description: Get another player's ping
     default: op
+  bumhug.intervalannouncement.everyone:
+    description: Used to send an interval message to everyone when another permission isn't provided
+    default: true
 commands:
   reloadinventoy:
     description: Reload a player's inventoy from before the last time they died
