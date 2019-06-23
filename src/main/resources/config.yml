@@ -8,7 +8,12 @@ gameFeatures:
   enderChestUse: false
   enderChestPlacement: true
   disableElytraFirework: true
+  minecartTeleporter: true
+  endermanGrief: false
+gameFixes:
   preventFallingThroughBedrock: true
+  preventBedBombing: true
+  preventStorageTeleport: true
 ctAnnounce:
   enabled: true
   delay: 10000
@@ -42,6 +47,13 @@ newfriendAssist:
     bed:
       material: BED
       amount: 1
+deathMessages:
+  enabled: true
+  sendPlayerCoordsOnDeath: true
+  announceDeaths: true
+  redDeathMessages: true
+obsidianGenerators:
+  enabled: true
 intervalAnnouncement:
   enabled: true
   announcements:
