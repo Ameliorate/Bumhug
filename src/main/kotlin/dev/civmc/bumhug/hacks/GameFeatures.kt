@@ -152,7 +152,7 @@ class GameFeatures: Hack(), Listener {
 
 			if (!tryToTeleportVertically(event.player, vehicleLocatoin, "logged out")) {
 				event.player.setHealth(0.000000)
-				Bumhug.instance!!.logger.log(Level.INFO, "Player '${event.player.name}' logged out in vehicle: killed")
+				Bumhug.instance.logger.log(Level.INFO, "Player '${event.player.name}' logged out in vehicle: killed")
 			}
 		}
 	}
@@ -170,7 +170,7 @@ class GameFeatures: Hack(), Listener {
 			Bukkit.getScheduler().runTaskLater(Bumhug.instance, {
 				if (!tryToTeleportVertically(player, event.vehicle.location, "exiting vehicle")) {
 					player.health = 0.000000
-					Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
+					Bumhug.instance.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
 				}
 			}, 2)
 		}
@@ -193,7 +193,7 @@ class GameFeatures: Hack(), Listener {
 					Bukkit.getScheduler().runTaskLater(Bumhug.instance, {
 						if (!tryToTeleportVertically(player, event.vehicle.location, "in destroyed vehicle")) {
 							it.health = 0.000000
-							Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
+							Bumhug.instance.logger.log(Level.INFO, "Player '${player.name}' exiting vehicle: killed")
 						}
 					}, 2)
 				}

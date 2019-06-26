@@ -38,7 +38,7 @@ fun tryToTeleportVertically(player: Player, location: Location, reason: String):
     if (performTeleport) {
         player.velocity = Vector()
         player.teleport(loc)
-        Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' $reason: Teleported to $loc")
+        Bumhug.instance.logger.log(Level.INFO, "Player '${player.name}' $reason: Teleported to $loc")
         return true
     }
     loc = baseLoc.clone()
@@ -67,7 +67,7 @@ fun tryToTeleportVertically(player: Player, location: Location, reason: String):
                 loc.y = loc.y + 1.02
                 loc.z = Math.floor(loc.z) + 0.500000
                 player.teleport(loc)
-                Bumhug.instance!!.logger.log(Level.INFO, "Player '${player.name}' $reason: Teleported to $loc")
+                Bumhug.instance.logger.log(Level.INFO, "Player '${player.name}' $reason: Teleported to $loc")
                 return true
             }
         } else {

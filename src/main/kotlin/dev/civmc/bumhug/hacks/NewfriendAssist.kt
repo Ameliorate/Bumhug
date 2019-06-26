@@ -49,7 +49,7 @@ public class NewfriendAssist: Hack(), Listener {
 			val cleanMessage = ChatColor.translateAlternateColorCodes('&',
 				message.replace("%Name%", event.player.displayName)
 			)
-			for (player in Bumhug.instance!!.server.onlinePlayers) {
+			for (player in Bumhug.instance.server.onlinePlayers) {
 				player.sendMessage(cleanMessage)
 			}
 		}

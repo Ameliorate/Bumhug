@@ -13,9 +13,9 @@ abstract class Hack {
 	open val prettyName: String = configName
 	
 	val enabled: Boolean
-		get() = Bumhug.instance!!.config.getBoolean(configName + ".enabled")
+		get() = Bumhug.instance.config.getBoolean(configName + ".enabled")
 	protected val config: ConfigurationSection
-		get() = Bumhug.instance!!.config.getConfigurationSection(configName)
+		get() = Bumhug.instance.config.getConfigurationSection(configName)
 
 	open val commandName: String? = null
 }
