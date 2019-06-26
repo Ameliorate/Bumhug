@@ -36,7 +36,7 @@ class CTAnnounce: Hack(), Listener {
 			.replace("%Victim%", event.victim.displayName)
 			.replace("%Attacker%", event.attacker.displayName)
 		)
-		Bumhug.instance!!.logger.log(Level.INFO, cleanMessage)
-		Bumhug.instance!!.broadcastToPerm("broadcastCombat", cleanMessage)
+		Bumhug.instance.logger.log(Level.INFO, cleanMessage)
+		Bumhug.instance.broadcastToPerm("broadcastCombat", cleanMessage)
 	}
 }

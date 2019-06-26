@@ -47,7 +47,7 @@ public class RaiderAnnounce: Hack(), Listener {
 				.replace("%Y%", event.block.location.y.toString())
 				.replace("%Z%", event.block.location.z.toString())
 			)
-			Bumhug.instance!!.broadcastToPerm("broadcastRaiding", cleanMessage)
+			Bumhug.instance.broadcastToPerm("broadcastRaiding", cleanMessage)
 		}
 	}
 }
