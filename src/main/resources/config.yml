@@ -8,7 +8,12 @@ gameFeatures:
   enderChestUse: false
   enderChestPlacement: true
   disableElytraFirework: true
+  minecartTeleporter: true
+  endermanGrief: false
+gameFixes:
   preventFallingThroughBedrock: true
+  preventBedBombing: true
+  preventStorageTeleport: true
   dropAllExpOnDeath: true
   deathExpPenalty: 0.9 # drop 90% of exp on death. From 0.0 to drop no exp to 1.0 to drop all exp. exp not dropped is deleted
 ctAnnounce:
@@ -44,6 +49,13 @@ newfriendAssist:
     bed:
       material: BED
       amount: 1
+deathMessages:
+  enabled: true
+  sendPlayerCoordsOnDeath: true
+  announceDeaths: true
+  redDeathMessages: true
+obsidianGenerators:
+  enabled: true
 intervalAnnouncement:
   enabled: true
   announcements:

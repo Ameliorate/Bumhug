@@ -64,7 +64,7 @@ class IntervalAnnouncement: Hack() {
                     intervalHours == 0.0 &&
                     intervalMinutes == 0.0 &&
                     intervalSeconds == 0.0) {
-                Bumhug.instance!!.logger.log(Level.WARNING,
+                Bumhug.instance.logger.log(Level.WARNING,
                         "all intervals of interval message '$key' are 0, skipping")
             }
 
@@ -83,7 +83,7 @@ class IntervalAnnouncement: Hack() {
         }
 
         // start the tack to make the announcements
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bumhug.instance!!, this::makeAnnouncementsAsNeeded, 1, 20)
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bumhug.instance, this::makeAnnouncementsAsNeeded, 1, 20)
     }
 
     /**
