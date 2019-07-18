@@ -9,6 +9,8 @@ gameFeatures:
   enderChestPlacement: true
   disableElytraFirework: true
   preventFallingThroughBedrock: true
+  dropAllExpOnDeath: true
+  deathExpPenalty: 0.9 # drop 90% of exp on death. From 0.0 to drop no exp to 1.0 to drop all exp. exp not dropped is deleted
 ctAnnounce:
   enabled: true
   delay: 10000

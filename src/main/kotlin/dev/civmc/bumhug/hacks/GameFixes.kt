@@ -1,6 +1,7 @@
 package dev.civmc.bumhug.hacks
 
 import dev.civmc.bumhug.Hack
+import dev.civmc.bumhug.util.levelExpToPoints
 import dev.civmc.bumhug.util.tryToTeleportVertically
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -12,6 +13,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityPortalEvent
 import org.bukkit.event.entity.EntityTeleportEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.InventoryHolder
 
@@ -22,6 +24,8 @@ public class GameFixes: Hack(), Listener {
 	private val preventStorageTeleport = config.getBoolean("preventStorageTeleport")
 	private val preventBedBombing = config.getBoolean("preventBedBombing")
 	private val preventFallingThroughBedrock = config.getBoolean("preventFallingThroughBedrock")
+	private val dropAllExpOnDeath = config.getBoolean("dropAllExpOnDeath")
+	private val deathExpPenalty = config.getDouble("deathExpPenalty")
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	fun onStorageTeleport(event: EntityTeleportEvent) {
@@ -67,5 +71,13 @@ public class GameFixes: Hack(), Listener {
 
 			tryToTeleportVertically(event.player, event.to, "falling into the void")
 		}
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	fun onPlayerDeath(event: PlayerDeathEvent){
+		if (!dropAllExpOnDeath)
+			return
+
+		event.droppedExp = (levelExpToPoints(event.entity.level, event.entity.exp) * deathExpPenalty).toInt()
 	}
 }

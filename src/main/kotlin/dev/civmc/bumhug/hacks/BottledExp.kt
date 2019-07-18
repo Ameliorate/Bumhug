@@ -2,6 +2,7 @@ package dev.civmc.bumhug.hacks
 
 import dev.civmc.bumhug.Bumhug
 import dev.civmc.bumhug.Hack
+import dev.civmc.bumhug.util.levelExpToPoints
 import org.bukkit.event.Listener
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ExpBottleEvent
@@ -28,7 +29,7 @@ class BottledExp: Hack(), Listener {
                 || event.clickedBlock.type !== Material.ENCHANTMENT_TABLE)
             return
 
-        val totalExperience = computeCurrentEXP(event.player)
+        val totalExperience = levelExpToPoints(event.player.level, event.player.exp)
 
         if (event.player.inventory.itemInMainHand == null ||
                 event.player.inventory.itemInMainHand.type != Material.GLASS_BOTTLE ||
@@ -111,30 +112,5 @@ class BottledExp: Hack(), Listener {
         if (event.experience != expPerBottle) {
             Bumhug.instance!!.logger.log(Level.INFO, "Xp control lost: ${event.experience}")
         }
-    }
-
-    fun computeCurrentEXP(player: Player): Int {
-        // good luck
-        val cLevel = player.level.toFloat()
-        val progress = player.exp
-        var a = 1f
-        var b = 6f
-        var c = 0f
-        var x = 2f
-        var y = 7f
-        if (cLevel > 16 && cLevel <= 31) {
-            a = 2.5f
-            b = -40.5f
-            c = 360f
-            x = 5f
-            y = -38f
-        } else if (cLevel >= 32) {
-            a = 4.5f
-            b = -162.5f
-            c = 2220f
-            x = 9f
-            y = -158f
-        }
-        return Math.floor((a * cLevel * cLevel + b * cLevel + c + progress * (x * cLevel + y)).toDouble()).toInt()
     }
 }
